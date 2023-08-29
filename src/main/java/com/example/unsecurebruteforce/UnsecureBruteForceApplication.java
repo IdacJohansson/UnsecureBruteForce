@@ -4,9 +4,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-@SpringBootApplication //(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication
 public class UnsecureBruteForceApplication {
 
 
@@ -24,8 +25,19 @@ public class UnsecureBruteForceApplication {
         };
     }
 
+    public static void encryptUserPassword(){
+        String password = "Hello";
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+        String result = encoder.encode(password);
+        System.out.println("encoded password = " + result);
+
+    }
+
+
+
     public static void main(String[] args) {
         SpringApplication.run(UnsecureBruteForceApplication.class, args);
+        encryptUserPassword();
 
 }
 

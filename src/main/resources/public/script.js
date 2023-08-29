@@ -9,7 +9,7 @@ function validation(){ // Index form-validation
         let isValid = false;
 
         while(isValid == false) {
-            if (firstname == "Klas" && password == "123") {
+            if (firstname == "Klas" && password == "1234") {
                 isValid = true;
                 sessionStorage.setItem("keyIsValid", "true");
                 window.location.href = "admin.html";

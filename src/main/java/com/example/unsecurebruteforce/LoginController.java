@@ -1,9 +1,9 @@
 package com.example.unsecurebruteforce;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,26 +16,26 @@ private final LoginRepo loginRepo;
         this.loginRepo = loginRepo;
     }
 
-@RequestMapping("/users")
+@RequestMapping("/index")
     public List<Login> getAllUsers(){
         return loginRepo.findAll();
 }
 
-/*@PostMapping("users/add")
-    public List<Login> addUser(@ResponseBody Login l){
-        loginRepo.save(l);
-        return loginRepo.findAll();
-}*/
+@PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Login login){
+        String userName = login.getUsername();
+        String passWord = login.getPassword();
+
+        if ("Bobbo".equals(userName) && "1234".equals(passWord)) {
+            return ResponseEntity.ok("Great! Login was successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Login was not successful");
+
+    }
+}
 
 
 
 
-
-
-
-    // Create an encoder with strength 16
-    /*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
-    String result = encoder.encode("myPassword");
-    assertTrue(encoder.matches("myPassword", result));*/
 }
 
